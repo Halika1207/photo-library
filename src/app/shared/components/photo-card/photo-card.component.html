@@ -1,6 +1,6 @@
-<mat-card class="photo-card">
+<mat-card class="photo-card" *ngIf="photo">
   <button class="photo-card-wrapper" (click)="onClick()">
-    <img class="photo-card-image" [src]="photo.encodedUrl">
+    <img class="photo-card-image" [src]="encodedImage">
   </button>
 
   <ng-container *ngIf="pageConfig.isShownActionsBlocks">

@@ -2,6 +2,7 @@
   <div class="photo-cards-card" *ngFor="let photo of photos">
     <app-photo-card
       [photo]="photo"
+      [image]="photo.encodedUrl"
       (photoClick)="onPhotosClick($event)"
       (redirectToDetails)="onRedirectToDetails($event)"
       [buttonTitle]="buttonTitle"

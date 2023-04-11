@@ -5,7 +5,7 @@ import { PhotoBlob } from '../../models/photo-card.model';
   selector: 'app-photo-cards-list',
   templateUrl: './photo-cards-list.component.html',
   styleUrls: ['./photo-cards-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoCardsListComponent {
   @Input() photos: PhotoBlob[];
@@ -14,6 +14,7 @@ export class PhotoCardsListComponent {
 
   @Output() photoClick: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
   @Output() redirectToDetail: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
+
 
   onPhotosClick(photo: PhotoBlob): void {
     this.photoClick.emit(photo);

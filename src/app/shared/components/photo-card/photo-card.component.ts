@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { PhotoBlob } from '../../models/photo-card.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Image64, PhotoBlob } from '../../models/photo-card.model';
 import { PAGE_CONFIG, PageConfig } from 'src/app/core/config/page.config';
 
 @Component({
@@ -10,8 +10,17 @@ import { PAGE_CONFIG, PageConfig } from 'src/app/core/config/page.config';
 })
 export class PhotoCardComponent {
   isSelected = false;
+  private imageCard: Image64;
 
   @Input() photo: PhotoBlob;
+  @Input() set image(image: Image64) {
+    this.imageCard = image;
+  }
+
+  get encodedImage(): Image64 {
+    return this.imageCard || this.photo.encodedUrl;
+  }
+
   @Input() buttonTitle: string;
   @Input() buttonTitleSelected: string;
 
