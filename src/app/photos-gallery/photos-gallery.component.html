@@ -1,1 +1,9 @@
-<p>photos-gallery works!</p>
+<div class="gallery-wrapper" *ngIf="photos$ | async as photos" #container>
+  <app-photo-cards-list
+    [photos]="photos"
+    (photoClick)="onAddToCollection($event)"
+    buttonTitle="Add to favorite"
+    buttonTitleSelected="Remove from favorite"
+  ></app-photo-cards-list>
+</div>
+

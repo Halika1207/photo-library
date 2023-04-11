@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PhotoBlob } from '../../models/photo-card.model';
 
 @Component({
   selector: 'app-photo-cards-list',
   templateUrl: './photo-cards-list.component.html',
   styleUrls: ['./photo-cards-list.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoCardsListComponent {
   @Input() photos: PhotoBlob[];

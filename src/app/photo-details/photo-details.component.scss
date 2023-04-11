@@ -1,0 +1,11 @@
+$header_height: 50px;
+
+.photo-details {
+  max-height: calc(100vh - #{$header_height});
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

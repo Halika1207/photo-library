@@ -1,1 +1,8 @@
-<p>favorites-gallery works!</p>
+<div class="gallery-wrapper" >
+  <app-photo-cards-list
+    [photos]="favoritePhotos"
+    (redirectToDetail)="onRedirectToPhotoDetails($event)"
+    buttonTitleSelected="Remove from collection"
+  ></app-photo-cards-list>
+</div>
+
