@@ -1,1 +1,12 @@
-<p>photo-cards-list works!</p>
+<section class="photo-cards-container">
+  <div class="photo-cards-card" *ngFor="let photo of photos">
+    <app-photo-card
+      [photo]="photo"
+      (photoClick)="onPhotosClick($event)"
+      (redirectToDetails)="onRedirectToDetails($event)"
+      [buttonTitle]="buttonTitle"
+      [buttonTitleSelected]="buttonTitleSelected"
+    ></app-photo-card>
+  </div>
+</section>
+
