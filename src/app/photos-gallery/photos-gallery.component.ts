@@ -19,7 +19,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
   innerPhotosQuantity = 0;
   pagePagination = 1;
   photoQueryParams: LoadDataQuantityDetector;
-  photos$$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  photos$$: BehaviorSubject<PhotoBlob[]> = new BehaviorSubject<PhotoBlob[]>([]);
   photos$ = this.photos$$.asObservable();
 
   private screenSize$: Subject<number> = new Subject();
@@ -46,7 +46,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
   onScroll() {
     const containerCoordinate = this.galleryContainer.nativeElement.getBoundingClientRect();
 
-    if( containerCoordinate.bottom - 1 <= window.innerHeight) {
+    if( containerCoordinate.bottom - 10 <= window.innerHeight) {
       this.pagePagination +=1;
       this.loadPhotos(this.pagePagination, this.innerPhotosQuantity);
     }
