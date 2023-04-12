@@ -5,7 +5,8 @@ import { LoadDataQuantityDetector, ScreenSizeDetector } from '../shared/models/s
 import { BehaviorSubject, Observable, Subject, forkJoin,  map, switchMap, takeUntil } from 'rxjs';
 import { Image64, Photo, PhotoBlob } from '../shared/models/photo-card.model';
 import { PhotosGalleryService } from './services/photos-gallery.service';
-import { FavoritePhotosService } from '../favorites-gallery/services/favorite-cards.service';
+import { PhotoStorageService } from '../core/services/photo-storage.service';
+
 
 @Component({
   selector: 'app-photos-gallery',
@@ -26,7 +27,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly photoCardsService: PhotosGalleryService,
-    private readonly favoriteCardsService: FavoritePhotosService,
+    private readonly favoriteCardsService: PhotoStorageService,
     private readonly cdRef: ChangeDetectorRef,
   ) {
     this.screenSize = new ScreenSizeDetector(window.innerWidth);

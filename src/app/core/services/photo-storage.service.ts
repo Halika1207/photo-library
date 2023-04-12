@@ -4,7 +4,7 @@ import { PhotoBlob } from 'src/app/shared/models/photo-card.model';
 @Injectable({
   providedIn: 'root'
 })
-export class FavoritePhotosService {
+export class PhotoStorageService {
   photo: PhotoBlob;
   favoriteCollection: PhotoBlob[] = [];
 

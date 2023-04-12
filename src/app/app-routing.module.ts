@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DataResolverService } from './core/services/data-resolver.service';
 
 export enum RoutesPath {
   PHOTOS = 'photos/:id',
@@ -17,6 +18,7 @@ const routes: Routes = [
       {
         path: RoutesPath.FAVORITES,
         loadChildren: () => import('./favorites-gallery/favorites-gallery.module').then((m: any) => m.FavoritesGalleryModule),
+        resolve: { data: DataResolverService },
       },
       {
         path: RoutesPath.PHOTOS,

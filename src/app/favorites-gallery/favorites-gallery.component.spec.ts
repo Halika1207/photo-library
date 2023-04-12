@@ -1,18 +1,20 @@
 import { Router } from '@angular/router';
 import { FavoritesGalleryComponent } from './favorites-gallery.component';
-import { FavoritePhotosService } from './services/favorite-cards.service';
+
 import { MockService } from 'ng-mocks';
 import { favoriteCollectionMock, photoBlobMockInCollection } from './mocks/favorite-collection.mock';
+import { of } from 'rxjs';
+import { PhotoStorageService } from '../core/services/photo-storage.service';
 
 describe('FavoritesGalleryComponent', () => {
   let component: FavoritesGalleryComponent;
-  let favoriteCardsService: FavoritePhotosService;
+  let photoStorageService: PhotoStorageService;
   let router: Router;
  //TODO: Finish configuring jest and proceed with tests. I use jest due small experience with karma and time limits
   beforeEach(() => {
     router = MockService<Router>(Router);
-    favoriteCardsService = MockService<FavoritePhotosService>(FavoritePhotosService);
-    component = new FavoritesGalleryComponent(favoriteCardsService, router);
+    photoStorageService = MockService<PhotoStorageService >(PhotoStorageService );
+    component = new FavoritesGalleryComponent(photoStorageService, router);
   });
 
   it('should create', () => {
@@ -20,12 +22,12 @@ describe('FavoritesGalleryComponent', () => {
   });
 
   it('should return favorite collection', () => {
-    favoriteCardsService.favoriteCollection = favoriteCollectionMock;
-    jest.spyOn(favoriteCardsService, 'getFavoritesCollection');
+    photoStorageService.favoriteCollection = favoriteCollectionMock;
+    jest.spyOn(photoStorageService, 'getFavoritesCollection');
     component.ngOnInit();
 
-    expect(favoriteCardsService.getFavoritesCollection).toHaveBeenCalled();
-    expect(component.favoritePhotos.length).toEqual(favoriteCardsService.favoriteCollection.length);
+    expect(photoStorageService.getFavoritesCollection).toHaveBeenCalled();
+    expect(component.favoritePhotos.length).toEqual(photoStorageService.favoriteCollection.length);
   });
 
   it('should call navigate by url with proper id', () => {
@@ -34,5 +36,15 @@ describe('FavoritesGalleryComponent', () => {
     const { id } =photoBlobMockInCollection;
 
     expect(router.navigateByUrl).toHaveBeenCalledWith(id);
+  });
+
+  it('should call redirect by url is collection is empty', (done) => {
+    component.favoritePhotos = [];
+    component.ngOnInit();
+
+    of(component.favoritePhotos).subscribe(() => {
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/');
+      done();
+    })
   });
 });

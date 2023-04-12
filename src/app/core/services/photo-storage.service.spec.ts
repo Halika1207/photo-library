@@ -1,12 +1,12 @@
-import { favoriteCollectionMock, photoBlobMockInCollection, photoBlobMockOutOfCollection } from "../mocks/favorite-collection.mock";
-import { FavoritePhotosService } from "./favorite-cards.service";
+import { favoriteCollectionMock, photoBlobMockInCollection, photoBlobMockOutOfCollection } from "../../favorites-gallery/mocks/favorite-collection.mock";
+import { PhotoStorageService } from "./photo-storage.service";
 
 describe('FavoritePhotosService', () => {
-  let service: FavoritePhotosService;
+  let service: PhotoStorageService;
    ///TODO: Finish configuring jest and proceed with tests. I use jest due small experience with karma and time limits
 
   beforeEach(() => {
-    service = new FavoritePhotosService();
+    service = new PhotoStorageService();
   });
 
   it('should be created', () => {

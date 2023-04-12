@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PhotoBlob } from '../shared/models/photo-card.model';
-import { FavoritePhotosService } from '../favorites-gallery/services/favorite-cards.service';
+
 import { PAGE_CONFIG } from '../core/config/page.config';
 import { PHOTO_DETAILS_PAGE_CONFIG } from './config/photo-details.page.config';
+import { PhotoStorageService } from '../core/services/photo-storage.service';
 
 @Component({
   selector: 'app-photo-details',
@@ -16,7 +17,7 @@ export class PhotoDetailsComponent implements OnInit {
   photo: PhotoBlob;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly favoriteCardsService: FavoritePhotosService,
+    private readonly favoriteCardsService: PhotoStorageService,
     private readonly router: Router,
   ){}
 

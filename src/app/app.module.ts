@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { LoadingInterceptor } from './core/interceptor/loader-interceptor.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -23,17 +24,17 @@ import { LoadingInterceptor } from './core/interceptor/loader-interceptor.interc
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    CoreModule,
     SharedModule,
     PhotosGalleryModule,
     PhotoDetailsModule,
     FavoritesGalleryModule,
-    CoreModule,
     HeaderModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
