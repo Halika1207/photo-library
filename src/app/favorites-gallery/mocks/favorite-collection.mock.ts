@@ -25,4 +25,25 @@ export const favoriteCollectionMock: PhotoBlob[] = [
     isSelected: true,
     encodedUrl: 'data:image/jpeg;base64 sfefhwr',
   }
-]
+];
+
+export const photoBlobMockOutOfCollection = {
+  photoUrl: {} as Blob,
+  id: '5',
+  isSelected: true,
+  encodedUrl: 'data:image/jpeg;base64 weuiwue',
+};
+
+export const photoBlobMockInCollection = {
+  photoUrl: {} as Blob,
+  id: '4',
+  isSelected: true,
+  encodedUrl: 'data:image/jpeg;base64 sfefhwr',
+};
+
+export const photoBlobMock = {
+    photoUrl: {} as Blob,
+    id: '3',
+    isSelected: true,
+    encodedUrl: 'data:image/jpeg;base64 HAKJD',
+  };

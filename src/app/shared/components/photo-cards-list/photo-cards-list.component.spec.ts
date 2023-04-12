@@ -1,23 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PhotoCardsListComponent } from './photo-cards-list.component';
+import { PhotoCardsListComponent } from "./photo-cards-list.component";
+import { photoBlobMock } from './../../../favorites-gallery/mocks/favorite-collection.mock';
 
 describe('PhotoCardsListComponent', () => {
   let component: PhotoCardsListComponent;
-  let fixture: ComponentFixture<PhotoCardsListComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PhotoCardsListComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(PhotoCardsListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new PhotoCardsListComponent();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('shoul emit photoClick', () => {
+    jest.spyOn(component.photoClick, 'emit');
+    component.onPhotosClick(photoBlobMock);
+
+    expect(component.photoClick.emit).toHaveBeenCalled();
+  });
+
+  it('should call redirectToDetails emit', () => {
+    jest.spyOn(component.redirectToDetail, 'emit');
+    component.onRedirectToDetails(photoBlobMock);
+
+    expect(component.redirectToDetail.emit).toHaveBeenCalled();
+  });
 });
+

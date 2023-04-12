@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnIn
 import { PAGE_CONFIG } from '../core/config/page.config';
 import { PHOTOS_GALLERY_PAGE_CONFIG } from './config/photos-gallery.page.config';
 import { LoadDataQuantityDetector, ScreenSizeDetector } from '../shared/models/screen-size.model';
-import { BehaviorSubject, Observable, Subject, forkJoin, from, map, of, share, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, forkJoin,  map, switchMap, takeUntil } from 'rxjs';
 import { Image64, Photo, PhotoBlob } from '../shared/models/photo-card.model';
 import { PhotosGalleryService } from './services/photos-gallery.service';
 import { FavoritePhotosService } from '../favorites-gallery/services/favorite-cards.service';
@@ -53,7 +53,9 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadPhotos(this.pagePagination, this.innerPhotosQuantity);
-
+    //TODO: think about two ways: 1. Find a new API with a photo collection that include smaller size of images
+    //2. Rewrite the approach to make requests for each image with a lower resolution
+    //3. Two approaches should iron out the problem with performance;
     this.screenSize$.pipe(
       takeUntil(this.unsubscribe$),
       map((screenWidth: number) => new ScreenSizeDetector(screenWidth)),

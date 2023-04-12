@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { PhotoBlob } from 'src/app/shared/models/photo-card.model';
 
 @Injectable({
@@ -8,13 +7,6 @@ import { PhotoBlob } from 'src/app/shared/models/photo-card.model';
 export class FavoritePhotosService {
   photo: PhotoBlob;
   favoriteCollection: PhotoBlob[] = [];
-
-  favoriteCollection$$: Subject<PhotoBlob[]> = new Subject<PhotoBlob[]>;
-  favoriteCollection$ = this.favoriteCollection$$.asObservable();
-
-  favoritePhoto$$: Subject<PhotoBlob> = new Subject<PhotoBlob>;
-  favoritePhoto$ = this.favoriteCollection$$.asObservable();
-
 
   addToFavorite(photo: PhotoBlob): void {
     if(photo.isSelected) {

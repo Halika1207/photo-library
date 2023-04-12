@@ -1,23 +1,37 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { PageConfig } from 'src/app/core/config/page.config';
 import { PhotoCardComponent } from './photo-card.component';
 
 describe('PhotoCardComponent', () => {
   let component: PhotoCardComponent;
-  let fixture: ComponentFixture<PhotoCardComponent>;
+  let pageConfig: PageConfig;
+
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PhotoCardComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(PhotoCardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    pageConfig = {
+      isRedirectedToPhotoDetails: false,
+      isShownActionsBlocks: true,
+    };
+    component = new PhotoCardComponent(pageConfig)
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('shoul emit photoClick value and change is selected state', () => {
+    component.isSelected = false;
+    jest.spyOn(component.photoClick, 'emit');
+    component.onClick();
+
+    expect(component.photoClick.emit).toHaveBeenCalled();
+    expect(component.isSelected).toBeTruthy();
+  });
+
+  it('should call redirectToDetails emit', () => {
+    pageConfig.isRedirectedToPhotoDetails = true;
+    jest.spyOn(component.redirectToDetails, 'emit');
+    component.onClick();
+
+    expect(component.redirectToDetails.emit).toHaveBeenCalled();
   });
 });
