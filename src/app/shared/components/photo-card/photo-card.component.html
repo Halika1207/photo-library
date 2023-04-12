@@ -1,12 +1,53 @@
-<mat-card class="photo-card" *ngIf="photo">
-  <button class="photo-card-wrapper" (click)="onClick()">
-    <img class="photo-card-image" [src]="encodedImage">
-  </button>
+<section class="photo">
+  <mat-card class="photo-card" *ngIf="photo">
+    <button class="photo-card-wrapper" (click)="onClick()">
+      <img class="photo-card-image" [src]="encodedImage">
+    </button>
 
-  <ng-container *ngIf="pageConfig.isShownActionsBlocks">
-    <mat-card-actions>
+    <ng-container *ngIf="pageConfig.isShownDescriptionBlock">
+      <mat-card-actions class="photo-card-description">
+        <div>
+          <span class="photo-card-title">Author:</span>
+          <span class="photo-card-author">{{ photo.author }}</span>
+        </div>
+        <ng-container *ngIf="showSourse">
+          <div>
+            <span class="photo-card-title">Photo id:</span>
+            <span class="photo-card-author">{{ photo.id }}</span>
+          </div>
+          <div>
+            <span class="photo-card-title">Sourse:</span>
+            <a
+              [href]="photo.url"
+              target="_blank"
+            >
+              <span class="photo-card-author">{{ photo.url }}</span>
+            </a>
+          </div>
+        </ng-container>
+      </mat-card-actions>
+    </ng-container>
+
+    <ng-container *ngIf="pageConfig.isShownActionsBlocks && !pageConfig.isShownDescriptionBlock">
+      <mat-card-actions>
+        <button mat-button
+          class="photo-card-action"
+          [ngClass]="{'photo-card-action-selected': photo.isSelected }"
+          (click)="onClick()"
+        >
+          <mat-icon>favorite</mat-icon>
+          <span class="example-spacer"></span>
+          <span *ngIf="!photo?.isSelected">{{ buttonTitle }}</span>
+          <span *ngIf="photo?.isSelected">{{ buttonTitleSelected }}</span>
+        </button>
+      </mat-card-actions>
+    </ng-container>
+  </mat-card>
+
+  <ng-container *ngIf="pageConfig.isShownActionsBlocks && pageConfig.isShownDescriptionBlock">
+    <mat-card-actions class="photo-card-action-wrapper">
       <button mat-button
-        class="photo-card-action"
+        class="photo-card-action button-padding"
         [ngClass]="{'photo-card-action-selected': photo.isSelected }"
         (click)="onClick()"
       >
@@ -17,4 +58,4 @@
       </button>
     </mat-card-actions>
   </ng-container>
-</mat-card>
+</section>

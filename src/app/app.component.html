@@ -1,8 +1,9 @@
-<app-loader *ngIf="isLoading$ | async as loading"
-  ngClass="{{ loading ? 'no-scroll' : 'scroll' }}"
-  [color]="'accent'"
-  [diameter]="80"
-  [isOverlayed]="true"
-></app-loader>
 <app-header></app-header>
-<router-outlet></router-outlet>
+<ng-container >
+  <router-outlet></router-outlet>
+  <app-loader *ngIf="isLoading$ | async as loading"
+    [color]="'accent'"
+    [diameter]="80"
+    [isOverlayed]="false"
+></app-loader>
+</ng-container>

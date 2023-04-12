@@ -23,6 +23,7 @@ export class PhotoCardComponent {
 
   @Input() buttonTitle: string;
   @Input() buttonTitleSelected: string;
+  @Input() showSourse = false;
 
   @Output() photoClick: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
   @Output() redirectToDetails: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
