@@ -7,7 +7,7 @@ describe('IsPhotosInFavoritesGuard', () => {
   let guard: IsPhotosInFavoritesGuard;
   let router: Router;
   let favoritePhotoService: FavoritePhotosService;
-  ///TODO: Finish configuring jest and proceed with tests, it is not finished due time deadline
+ ///TODO: Finish configuring jest and proceed with tests. I use jest due small experience with karma and time limits
   beforeEach(() => {
     router = MockService<Router>(Router);
     favoritePhotoService = MockService(FavoritePhotosService);

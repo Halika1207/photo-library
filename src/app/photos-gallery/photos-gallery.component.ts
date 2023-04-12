@@ -45,7 +45,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
   onScroll() {
     const containerCoordinate = this.galleryContainer.nativeElement.getBoundingClientRect();
 
-    if( containerCoordinate.bottom - 20 <= window.innerHeight) {
+    if( containerCoordinate.bottom - 1 <= window.innerHeight) {
       this.pagePagination +=1;
       this.loadPhotos(this.pagePagination, this.innerPhotosQuantity);
     }
@@ -53,9 +53,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadPhotos(this.pagePagination, this.innerPhotosQuantity);
-    //TODO: think about two ways: 1. Find a new API with a photo collection that include smaller size of images
-    //2. Rewrite the approach to make requests for each image with a lower resolution
-    //3. Two approaches should iron out the problem with performance;
+
     this.screenSize$.pipe(
       takeUntil(this.unsubscribe$),
       map((screenWidth: number) => new ScreenSizeDetector(screenWidth)),
@@ -95,17 +93,20 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
   }
 
   private loadPhotoAndEncode(photos: Photo[]): Observable<{ photoUrl: Blob; id: string; isSelected: boolean }>[] {
-    const getImageReuest = photos.map((photo: Photo) => this.photoCardsService.getPhotoCard(photo?.download_url).pipe(
+    const getImageReuest = photos.map((photo: Photo) => this.photoCardsService.getPhotoCard(photo.id).pipe(
       map((value: Blob) =>  ({
         photoUrl: value,
         id: photo.id,
         isSelected: false,
+        author: photo.author,
+        url: photo.url,
       }))
     ));
 
       return getImageReuest;
   }
 
+  //Rewrite this metod. Was added like a fast solution for encoding. Learn deeper about approaches to encode;
   private convertBlobToBase64(blob: PhotoBlob): PhotoBlob {
     const reader = new FileReader();
     reader.readAsDataURL(blob.photoUrl);

@@ -8,7 +8,7 @@ describe('FavoritesGalleryComponent', () => {
   let component: FavoritesGalleryComponent;
   let favoriteCardsService: FavoritePhotosService;
   let router: Router;
-  ///TODO: Finish configuring jest and proceed with tests.
+ //TODO: Finish configuring jest and proceed with tests. I use jest due small experience with karma and time limits
   beforeEach(() => {
     router = MockService<Router>(Router);
     favoriteCardsService = MockService<FavoritePhotosService>(FavoritePhotosService);

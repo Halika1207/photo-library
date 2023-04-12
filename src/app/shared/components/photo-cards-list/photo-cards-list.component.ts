@@ -7,6 +7,7 @@ import { PhotoBlob } from '../../models/photo-card.model';
   styleUrls: ['./photo-cards-list.component.scss'],
 })
 export class PhotoCardsListComponent {
+  //TODO: set ChengaDetection Strategy onPush. Use set or onchanges due changedetector issue
   @Input() photos: PhotoBlob[];
   @Input() buttonTitle: string;
   @Input() buttonTitleSelected: string;

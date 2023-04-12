@@ -3,7 +3,7 @@ import { FavoritePhotosService } from "./favorite-cards.service";
 
 describe('FavoritePhotosService', () => {
   let service: FavoritePhotosService;
-  ///TODO: Finish configuring jest and proceed with tests
+   ///TODO: Finish configuring jest and proceed with tests. I use jest due small experience with karma and time limits
 
   beforeEach(() => {
     service = new FavoritePhotosService();

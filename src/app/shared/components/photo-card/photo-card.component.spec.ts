@@ -10,6 +10,7 @@ describe('PhotoCardComponent', () => {
     pageConfig = {
       isRedirectedToPhotoDetails: false,
       isShownActionsBlocks: true,
+      isShownDescriptionBlock: false,
     };
     component = new PhotoCardComponent(pageConfig)
   });
