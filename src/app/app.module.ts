@@ -5,9 +5,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PhotosGalleryModule } from './photos-gallery/photos-gallery.module';
-import { PhotoDetailsModule } from './photo-details/photo-details.module';
-import { FavoritesGalleryModule } from './favorites-gallery/favorites-gallery.module';
 import { CoreModule } from './core/core.module';
 import { HeaderModule } from './header/header.module';
 import { RouterModule } from '@angular/router';
@@ -26,9 +23,6 @@ import { LoadingInterceptor } from './core/interceptor/loader-interceptor.interc
     HttpClientModule,
     CoreModule,
     SharedModule,
-    PhotosGalleryModule,
-    PhotoDetailsModule,
-    FavoritesGalleryModule,
     HeaderModule,
   ],
   providers: [

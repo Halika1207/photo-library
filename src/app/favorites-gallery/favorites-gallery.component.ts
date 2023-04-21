@@ -28,7 +28,7 @@ export class FavoritesGalleryComponent implements OnInit, OnDestroy {
 
     of(this.favoritePhotos).pipe(
       takeUntil(this.unsibscribe$),
-      map((photos: PhotoBlob[]) => !!(photos && photos.length) || this.router.navigateByUrl('/'))
+      map((photos: PhotoBlob[]) => !!(photos && photos.length) || this.router.navigateByUrl('/')),
     ).subscribe();
   }
 

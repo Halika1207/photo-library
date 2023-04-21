@@ -17,4 +17,4 @@ import { PhotoDetailsRoutes } from './photo-details.routing';
     PhotoDetailsComponent,
   ]
 })
-export class PhotoDetailsModule { }
+export class PhotoDetailsModule {}

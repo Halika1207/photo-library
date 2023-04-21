@@ -18,7 +18,7 @@ export class AppComponent implements AfterContentChecked  {
   ) {}
 
   ngAfterContentChecked(): void {
-    //TODO: Read deeper about this problem:ERROR Error: ExpressionChangedAfterItHasBeenCheckedError 
+    //TODO: Read deeper about this problem:ERROR Error: ExpressionChangedAfterItHasBeenCheckedError
     this.changeDetector.detectChanges();
   }
 }

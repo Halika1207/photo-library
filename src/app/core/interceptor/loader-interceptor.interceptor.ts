@@ -21,7 +21,7 @@ export class LoadingInterceptor implements HttpInterceptor {
     const min = Math.ceil(200);
     const max = Math.floor(300);
     const mathRandomDelay = Math.floor(Math.random() * (max - min + 1) + min)
-
+    //TODO: check how to cover next()
     if(request.url.includes(ApiUrl.API_LIST_URL)) {
       return next.handle(request).pipe(
         tap(() => this.pageLoaderService.isLoading$.next(true)),

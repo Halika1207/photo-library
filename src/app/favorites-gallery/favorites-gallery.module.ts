@@ -17,4 +17,4 @@ import { FavoritesGalleryRoutes } from './favorites-gallery.routing';
     FavoritesGalleryComponent,
   ]
 })
-export class FavoritesGalleryModule { }
+export class FavoritesGalleryModule {}

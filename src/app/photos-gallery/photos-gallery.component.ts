@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PAGE_CONFIG } from '../core/config/page.config';
 import { PHOTOS_GALLERY_PAGE_CONFIG } from './config/photos-gallery.page.config';
 import { LoadDataQuantityDetector, ScreenSizeDetector } from '../shared/models/screen-size.model';
-import { BehaviorSubject, Observable, Subject, forkJoin,  map, switchMap, takeUntil } from 'rxjs';
-import { Image64, Photo, PhotoBlob } from '../shared/models/photo-card.model';
+import { BehaviorSubject, Observable, Subject, catchError, forkJoin, map, switchMap, takeUntil, throwError } from 'rxjs';
+import {  Photo, PhotoBlob } from '../shared/models/photo-card.model';
 import { PhotosGalleryService } from './services/photos-gallery.service';
 import { PhotoStorageService } from '../core/services/photo-storage.service';
 
@@ -27,8 +27,7 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly photoCardsService: PhotosGalleryService,
-    private readonly favoriteCardsService: PhotoStorageService,
-    private readonly cdRef: ChangeDetectorRef,
+    private readonly photoStorageService: PhotoStorageService,
   ) {
     this.screenSize = new ScreenSizeDetector(window.innerWidth);
     this.photoQueryParams = new LoadDataQuantityDetector(this.screenSize, window.innerHeight);
@@ -67,9 +66,9 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
 
   onAddToCollection(photo: PhotoBlob): void {
     if(photo.isSelected){
-      this.favoriteCardsService.addToFavorite(photo);
+      this.photoStorageService.addToFavorite(photo);
     } else {
-      this.favoriteCardsService.removeSingleItemFromCollection(photo);
+      this.photoStorageService.removeSingleItemFromCollection(photo);
     }
   }
 
@@ -82,14 +81,13 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
     this.photoCardsService.getPhotoCards(page, limit).pipe(
       takeUntil(this.unsubscribe$),
       switchMap((photos: Photo[]) => forkJoin(this.loadPhotoAndEncode(photos))),
-      map((photosBlob: PhotoBlob[]) => photosBlob.map((photoBlob: PhotoBlob) => this.convertBlobToBase64(photoBlob))),
+      switchMap((photosBlob: PhotoBlob[]) => forkJoin(photosBlob.map((photo: PhotoBlob) => this.convertToBase64(photo)))),
+      catchError((err: Error) => throwError(err)),
     ).subscribe((photos: PhotoBlob[]) =>  {
       this.photos$$.next([
         ...this.photos$$.getValue(),
         ...photos
       ]);
-
-      this.cdRef.detectChanges();
     });
   }
 
@@ -107,18 +105,17 @@ export class PhotosGalleryComponent implements OnInit, OnDestroy {
       return getImageReuest;
   }
 
-  //Rewrite this metod. Was added like a fast solution for encoding. Learn deeper about approaches to encode;
-  private convertBlobToBase64(blob: PhotoBlob): PhotoBlob {
+  private convertToBase64(blob: PhotoBlob): Observable<PhotoBlob> {
     const reader = new FileReader();
-    reader.readAsDataURL(blob.photoUrl);
-    new Promise(resolve => {
+    return new Observable((sub) => {
+      reader.readAsDataURL(blob.photoUrl);
+      reader.onload;
       reader.onloadend = () => {
-        resolve(reader.result);
-      }
-   }).then((image: Image64) => {
-     blob.encodedUrl = image;
-     return blob;
-   })
-   return blob;
+        sub.next({ ...blob, encodedUrl: reader.result });
+        sub.complete();
+      };
+
+      reader.onerror = (err) => sub.error(err);
+    })
   }
 }

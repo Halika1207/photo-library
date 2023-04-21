@@ -7,8 +7,8 @@ import { PhotosGalleryRoutes } from './photos-gallery.routing';
 
 @NgModule({
   declarations: [
-    PhotosGalleryComponent
-  ],
+    PhotosGalleryComponent,
+   ],
   imports: [
     CommonModule,
     PhotosGalleryRoutes,
@@ -18,4 +18,4 @@ import { PhotosGalleryRoutes } from './photos-gallery.routing';
     PhotosGalleryComponent,
   ]
 })
-export class PhotosGalleryModule { }
+export class PhotosGalleryModule {}

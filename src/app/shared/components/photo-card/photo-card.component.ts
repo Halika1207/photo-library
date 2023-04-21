@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Image64, PhotoBlob } from '../../models/photo-card.model';
 import { PAGE_CONFIG, PageConfig } from 'src/app/core/config/page.config';
 
@@ -8,17 +8,14 @@ import { PAGE_CONFIG, PageConfig } from 'src/app/core/config/page.config';
   styleUrls: ['./photo-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PhotoCardComponent {
+export class PhotoCardComponent  {
   isSelected = false;
-  private imageCard: Image64;
 
   @Input() photo: PhotoBlob;
-  @Input() set image(image: Image64) {
-    this.imageCard = image;
-  }
+  @Input() image: Image64;
 
   get encodedImage(): Image64 {
-    return this.imageCard || this.photo.encodedUrl;
+    return this.image || this.photo.encodedUrl;
   }
 
   @Input() buttonTitle: string;
@@ -27,9 +24,9 @@ export class PhotoCardComponent {
 
   @Output() photoClick: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
   @Output() redirectToDetails: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
+  @Output() buttonClick: EventEmitter<PhotoBlob> = new EventEmitter<PhotoBlob>();
 
   constructor(@Inject(PAGE_CONFIG) public pageConfig: PageConfig) {}
-
 
   onClick(): void {
     if(this.pageConfig.isRedirectedToPhotoDetails) {
