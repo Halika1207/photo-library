@@ -13,16 +13,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./photos-gallery/photos-gallery.module').then((m: any) => m.PhotosGalleryModule),
+        loadChildren: () => import('./photos-gallery/photos-gallery.module').then(m  => m.PhotosGalleryModule),
       },
       {
         path: RoutesPath.FAVORITES,
-        loadChildren: () => import('./favorites-gallery/favorites-gallery.module').then((m: any) => m.FavoritesGalleryModule),
+        loadChildren: () => import('./favorites-gallery/favorites-gallery.module').then(m => m.FavoritesGalleryModule),
         resolve: { data: DataResolverService },
       },
       {
         path: RoutesPath.PHOTOS,
-        loadChildren: () => import('./photo-details/photo-details.module').then((m: any) => m.PhotoDetailsModule),
+        loadChildren: () => import('./photo-details/photo-details.module').then(m => m.PhotoDetailsModule),
       },
       {
         path: '**',

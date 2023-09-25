@@ -45,7 +45,7 @@ export class PhotoStorageService {
     return this.favoriteCollection.find((el) => el.id === photo.id)
   }
 
-  private setToLocalStorage(key: string, value: any): void {
+  private setToLocalStorage<T>(key: string, value: T): void {
     const valueToString = JSON.stringify(value);
     window.localStorage.setItem(key, valueToString);
   }
